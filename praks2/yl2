@@ -1,0 +1,9 @@
+#!/bin/bash
+# Skript väljastab kasutajale kuupäeva ja ajaga seotud info
+
+
+echo "Current date is: $(date +'%B %d, %Y')"
+echo "Calendar of $(date +'%B %Y'):"
+cal | tail -n 7
+echo "Time is $(date +'%H:%M')"
+
