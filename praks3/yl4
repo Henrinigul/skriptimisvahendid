@@ -1,0 +1,9 @@
+#!/bin/bash
+
+# Skript küsib kasutajalt reisijate arvu ja kohtade arvu bussis ja väljastab mitu on täielikult täidetud bussi ja mitu inimest on maha jäänud
+read -p "Sisestage mitu reisijat on grupis: " reisijad
+read -p "Sisestage kohtade arv ühes bussis: " kohtade_arv
+taidetud_bussid=$(($reisijad / $kohtade_arv))
+mahajaanud=$(($reisijad % $kohtade_arv))
+echo "Täielikult täidetud busse on $taidetud_bussid."
+echo "Maha jäänud reisijaid on $mahajaanud."
