@@ -1,0 +1,10 @@
+#!/bin/bash
+
+# Skript küsib kasutajalt ainepunktide arvu ja nädalate arvu, väljastab ajakulu ümardatult
+read -p  "Sisestage ainepunktide arv: " ainepunktid
+read -p  "Sisestage nädalate arv: " nadalad
+
+aeg=$(echo "scale=1; $ainepunktid * 26 / $nadalad" | bc)
+aeg_ymarda=$(echo "($aeg + 0.9)/1" | bc)
+
+echo "Ühe nädala eeldatav ajakulu on $aeg_ymarda tundi."
