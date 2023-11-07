@@ -1,0 +1,22 @@
+#!/bin/bash
+#
+osch=0
+echo "1. Unix (Sun Os)"
+echo "2. Linux (Red Hat)"
+echo -n "Select your os choice [1 or 2]? "
+read osch
+
+###########Skripti osa, mis kontrollib valikut 1, on nende trellide vahel############################
+if [ $osch -eq 1 ] ; then
+     echo "You Pick up Unix (Sun Os)"
+###########Skripti osa, mis kontrollib valikut 2, on nende trellide vahel############################
+else #### nested if i.e. if within if ######
+       if [ $osch -eq 2 ] ; then
+             echo "You Pick up Linux (Red Hat)"
+       else
+             echo "What you don't like Unix/Linux OS."
+       fi
+fi
+#####################################################################################################
+
+# Muid valikuid saab rakendada kui lisada veel if-else tingimusi skripti.
