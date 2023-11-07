@@ -5,12 +5,13 @@ read reisijad
 echo -n "Sisesta kohtade arv bussis: "
 read kohad
 
-bussid=$(($reisijad / $kohad))√
-ylejaanud=$(($reisijad % $kohad))
+bussid=$((reisijad / kohad))
+ylejaanud=$((reisijad % kohad))
 
 if test $ylejaanud -gt 0 
 then
- 	bussid=$(($bussid + 1))
+        bussid=$((bussid + 1))
 fi
 
-echo "Kokku on vaja $bussid taisbussi"
+echo "Kokku on vaja $bussid t√§isbussi."
+
