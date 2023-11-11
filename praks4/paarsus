@@ -1,0 +1,21 @@
+#!/bin/bash
+
+# Skript kontrollib, kas anti üks parameeter
+if [ $# -eq 1 ]; then
+    # Parameeter edastatakse muutujasse "arv"
+    arv=$1
+    
+    # Arvutame jäägi 2-ga jagamisel
+    jaak=$(( $arv % 2 ))
+    
+    # Kontrollime, kas arv on paaris või paaritu
+    if [ $jaak -eq 0 ]; then
+        echo "Antud arv $arv on paaris."
+    else
+        echo "Antud arv $arv on paaritu."
+    fi
+else
+    # Kui kasutaja sisestas rohkem kui ühe parameetri, siis väljastame seletava teate
+    echo "Kasutamine: $0 <täisarv>"
+fi
+
