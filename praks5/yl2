@@ -1,7 +1,7 @@
 #!/bin/bash
 
 # Skript laseb kasutajal sisestada kuu numbri
-echo -e "Sisesta kuu number \c"
+echo -n "Sisesta kuu number: "
 read kuu
 # Kui kasutaja sisestab väärtuseks 1, 2 või 12, siis väljastatakse teade, et praegu on talv
 if test $kuu -eq 1 -o $kuu -eq 2 -o $kuu -eq 12
