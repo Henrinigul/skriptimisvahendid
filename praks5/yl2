@@ -1,0 +1,29 @@
+#!/bin/bash
+
+# Skript laseb kasutajal sisestada kuu numbri
+echo -e "Sisesta kuu number \c"
+read kuu
+# Kui kasutaja sisestab väärtuseks 1, 2 või 12, siis väljastatakse teade, et praegu on talv
+if test $kuu -eq 1 -o $kuu -eq 2 -o $kuu -eq 12
+then
+	echo "Praegu on talv"
+# Kui kasutaja sisestab väärtuse vahemikus 3-5, siis väljastatakse teade, et praegu on kevad
+
+elif test $kuu -ge 3 -a $kuu -le 5
+then
+	echo "Praegu on kevad"
+# Kui kasutaja sisestab väärtuse vahemikus 6-8, siis väljastatakse teade, et praegu on suvi
+
+elif test $kuu -ge 6 -a $kuu -le 8
+then 
+	echo "Praegu on suvi"
+# Kui kasutaja sisestab väärtuse vahemikus 9-11, siis väljastatakse teade, et praegu on sügis
+
+elif test $kuu -ge 9 -a $kuu -le 11
+then
+	echo "Praegu on sygis"
+# Kui kasutaja sisestab midagi muud, siis väljastatakse järgmine teade "Antud kuu numbrit pole"
+else
+	echo "Antud kuu numbrit pole"
+fi
+#skripti lõpp
