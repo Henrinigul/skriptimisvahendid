@@ -1,0 +1,29 @@
+#!/bin/bash
+
+# Skript küsib kasutajal sisestada oma vanuse
+echo -n "Sisesta (oma) vanus: "
+read vanus
+
+# Kui kasutaja sisestab oma vanuseks vahemikus 1-10, siis väljastatakse teade, et kasutaja on laps.
+if test $vanus -gt 0 -a $vanus -lt 11
+then
+	echo "oled laps"
+# Kui kasutaja sisestab oma vanuseks vahemikus 11-18, siis väljastatakse teade, et kasutaja on nooruk.
+elif test $vanus -ge 11 -a $vanus -lt 18
+then
+	echo "oled nooruk"
+# Kui kasutaja sisestab oma vanuseks vahemikus 18-63, siis väljastatakse teade, et kasutaja on täiskasvanu.
+
+elif test $vanus -ge 18 -a $vanus -lt 63
+then
+	echo "oled täiskasvanu"
+# Kui kasutaja sisestab oma vanuseks 63 või sellest suurema arvu, siis väljastatakse teade, et kasutaja on senioor.
+
+elif test $vanus -ge 63
+then
+	echo "oled senioor"
+else
+# Kui kasutaja sisestab midagi muud, näiteks tähe, siis väljastatakse "vigane sisend" teade.
+	echo "vigane sisend"
+# Lõpetab tingimuse
+fi
