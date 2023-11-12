@@ -1,0 +1,21 @@
+#!/bin/bash
+
+# aja jargi tervitamine
+
+echo -n "Sisesta aja väärtus: "
+read aeg 
+if [ $aeg -ge 6 -a $aeg -lt 12 ]; then
+	echo "Tere hommikust!"
+elif [  $aeg -ge 12 -a $aeg -lt 18 ]; then
+
+	echo "Tere paevast!"
+elif [ $aeg -ge 18 -a $aeg -lt 22 ]; then 
+
+	echo "Tere ohtust!"
+elif [ $aeg -ge 22 -a $aeg -lt 24 ]; then 
+
+	echo "Head ood"
+else
+	echo "Vale sisend"
+fi
+# Skript lõppeb
