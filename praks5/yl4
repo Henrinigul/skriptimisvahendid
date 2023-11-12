@@ -1,0 +1,17 @@
+#!/bin/bash
+
+# Skript tervitab aja jargi kasutajat tema kasutajanimega 
+echo -n "Sisesta aja väärtus: "
+read aeg
+kasutaja=$(whoami)
+
+if [ $aeg -ge 6 -a $aeg -lt 12 ]; then
+    echo "Tere hommikust, $kasutaja!"
+elif [ $aeg -ge 12 -a $aeg -lt 18 ]; then
+    echo "Tere päevast, $kasutaja!"
+elif [ $aeg -ge 18 -a $aeg -lt 22 ]; then
+    echo "Tere õhtust, $kasutaja!"
+else
+    echo "Head ööd, $kasutaja!"
+fi
+# Skript lõppeb
