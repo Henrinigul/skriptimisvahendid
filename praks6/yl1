@@ -1,0 +1,16 @@
+#!/bin/bash
+
+# Skript arvutab paarisarvude summa vahemikus 1 kuni 10
+summa=0
+for (( arv=1; arv<11; arv++))
+do
+	jaak=$(($arv % 2))
+	# Leitakse jääk 2ga jagamisel. Kui jääk on null, siis arv on paaris
+	if [ $jaak -eq 0 ]; then
+	# Kontrollib, kas jääk on võrdne nulliga
+		summa=$(($summa + $arv))	
+		# Lisab paarisarvu summale 
+	fi
+done
+echo "Arvude vahemikus 1 kuni 10 (kaasaarvutud) paarisarvude summa on: $summa" 
+# Prindib paarisarvude summa
