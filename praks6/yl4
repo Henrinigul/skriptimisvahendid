@@ -1,5 +1,6 @@
 #!/bin/bash
 
+# Skript lubab kasutajal sisestada suvalise arvu ja seejärel väljastab teate kas see number, mis kasutaja sisestas on algarv või mitte
 echo -e "Sisesta suvaline arv: "
 read arv
 
