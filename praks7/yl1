@@ -1,0 +1,17 @@
+#!/bin/bash
+# Skript väljastab tärnidega kujundi
+# Välisilmega kontrollime ridu 
+for ((i=1; i<=5; i++))
+do
+  # Sisemise silmusega kontrollime tärnide arvu igas reas
+  for ((j=1; j<=5; j++))
+  do
+    # Väljastame tärni ilma uuele reale minemata
+    echo -n "* "
+  done
+  # Lisame uue rea
+  echo
+done
+
+
+
