@@ -1,7 +1,5 @@
 #!/bin/bash
 
-#!/bin/bash
-
 # Skript küsib kasutajalt ridade ja tärnide arvu
 read -p "Sisesta ridade arv: " ridade_arv
 read -p "Sisesta tarnide arv reas: " tarnide_arv
