@@ -1,0 +1,18 @@
+#!/bin/bash
+
+# Küsime kasutajalt ridade arvu
+read -p "Sisesta ridade arv: " ridade_arv
+
+# Välisilmega kontrollime ridu
+for ((i=1; i<=ridade_arv; i++))
+do
+  # Sisemise silmusega kontrollime tärnide arvu igas reas
+  for ((j=1; j<=i; j++))
+  do
+    # Väljastame tärni ilma uuele reale minemata
+    echo -n "* "
+  done
+  # Lisame uue rea
+  echo
+done
+
