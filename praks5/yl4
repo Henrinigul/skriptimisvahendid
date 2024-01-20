@@ -1,10 +1,12 @@
 #!/bin/bash
 
-# Skript tervitab aja jargi kasutajat tema kasutajanimega 
+# Skript tervitab aja järgi kasutajat tema kasutajanimega
+# Küsime kasutajalt aja väärtust
 echo -n "Sisesta aja väärtus: "
 read aeg
 kasutaja=$(whoami)
 
+# Kontrollime, millises ajavahemikus skript käivitati ja teeme vastava tervituse
 if [ $aeg -ge 6 -a $aeg -lt 12 ]; then
     echo "Tere hommikust, $kasutaja!"
 elif [ $aeg -ge 12 -a $aeg -lt 18 ]; then
@@ -14,4 +16,6 @@ elif [ $aeg -ge 18 -a $aeg -lt 22 ]; then
 else
     echo "Head ööd, $kasutaja!"
 fi
+
 # Skript lõppeb
+
