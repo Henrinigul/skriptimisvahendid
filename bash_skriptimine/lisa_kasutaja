@@ -1,0 +1,43 @@
+#!/bin/bash
+
+# Kasutaja lisamise skript
+# Kasutaja nimi tuleb anda skripti parameetrina
+# Skript peab antud nimega kasutajat lisama süsteemi
+# ning looma kasutajale vastava sisuga kodukataloogi
+# ning pakkuma sobilikku kesta
+
+# Kontrolli, kas on antud õige arv parameetreid
+if [ $# -ne 1 ]; then
+    echo "Kasutusjuhend: $0 kasutajanimi"
+    exit 1
+fi
+
+# Määra kasutajanimi muutujasse
+kasutajanimi="$1"
+
+# Kontrolli, kas kasutaja on juba olemas
+if sudo id "$kasutajanimi" &>/dev/null; then
+    echo "Kasutaja nimega $kasutajanimi on juba olemas."
+    exit 1
+fi
+
+# Kasuta sudo useradd käsku vajalike võtmetega
+sudo useradd "$kasutajanimi" -m -s /bin/bash
+
+# Kontrolli, kas kasutaja lisamine oli edukas
+if [ $? -eq 0 ]; then
+    echo "Kasutaja nimega $kasutajanimi on lisatud süsteemi."
+
+    # Lisa vajalikud failid kodukataloogi struktuuri
+    sudo cp -r /etc/skel/. "/home/$kasutajanimi/"
+
+    echo "Kodukataloogi struktuur on lisatud."
+    
+    # Näita kasutajainfo
+    sudo id "$kasutajanimi"
+    sudo ls -la "/home/$kasutajanimi"
+else
+    echo "Probleem kasutaja $kasutajanimi lisamisega."
+    echo "Probleemi kood on $?."
+fi
+
