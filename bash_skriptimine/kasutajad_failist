@@ -1,0 +1,24 @@
+#!/bin/bash
+
+# Kontrolli, kas on antud õige arv parameetreid
+if [ $# -ne 1 ]; then
+    echo "Kasutusjuhend: $0 failinimi"
+    exit 1
+fi
+
+# Määra failinimi muutujasse
+failinimi="$1"
+
+# Kontrolli, kas fail eksisteerib
+if [ ! -f "$failinimi" ]; then
+    echo "Faili $failinimi ei leitud."
+    exit 1
+fi
+
+# Loe iga rida failist ja käivita lisa_kasutaja skript
+while IFS= read -r kasutajanimi || [ -n "$kasutajanimi" ]; do
+    echo "Lisan kasutaja: $kasutajanimi"
+    ./lisa_kasutaja "$kasutajanimi"
+    echo "-------------------------"
+done < "$failinimi"
+
