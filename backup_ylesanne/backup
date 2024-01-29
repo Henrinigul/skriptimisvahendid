@@ -1,0 +1,19 @@
+#!/bin/bash
+
+# Skripti eesmärk on varundada kasutajate kodukataloogid, lisades kuupäeva arhiivifaili nimele.
+# Varukataloog, kuhu arhiivid kopeeritakse, on määratud muutujasse backup_dir.
+
+backup_dir="/path/to/home_bcp"
+
+# Käivitame tsükli, mis käib läbi kõik kasutajakodukataloogide teed kataloogis /home/.
+
+for user_home in /home/*; do
+    # Iga kasutaja kodukataloogi tee tõlgendatakse kasutajanimeks.
+    user=$(basename "$user_home")
+    
+    # Käsitsi arhiveerime ja pakime kasutaja kodukataloogi, lisades kuupäeva arhiivifaili nimele.
+    tar -czvf "$backup_dir/$user.$(date +"%d.%m.%Y").tar.gz" "$user_home"
+done
+
+# Skript on edukalt lõpule viidud.
+
