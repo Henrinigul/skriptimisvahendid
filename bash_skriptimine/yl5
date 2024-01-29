@@ -1,0 +1,61 @@
+#!/bin/bash
+
+# Kontrolli, kas on antud õige arv parameetreid
+if [ $# -ne 1 ]; then
+    echo "Kasutusjuhend: $0 kasutajad_fail"
+    exit 1
+fi
+
+kasutajad_fail="$1"
+logifail="paroolid_log.txt"
+
+# Kontrolli, kas fail eksisteerib
+if [ ! -f "$kasutajad_fail" ]; then
+    echo "Faili $kasutajad_fail ei leitud."
+    exit 1
+fi
+
+# Loo logifail, kui see puudub
+touch "$logifail"
+
+# Loe kasutajate failist ja lisa iga kasutaja vastava parooliga süsteemile
+while IFS= read -r kasutajanimi || [ -n "$kasutajanimi" ]; do
+    echo "Lisan kasutaja: $kasutajanimi"
+
+    # Kontrolli, kas kasutaja on juba olemas
+    if sudo id "$kasutajanimi" &>/dev/null; then
+        echo "Kasutaja nimega $kasutajanimi on juba olemas."
+    else
+        # Genereeri juhuslik parool pwgen käsu abil
+        parool=$(pwgen -s 12 1)
+
+        # Kasuta sudo useradd käsku vajalike võtmetega
+        sudo useradd "$kasutajanimi" -m -s /bin/bash
+
+        # Kontrolli, kas kasutaja lisamine oli edukas
+        if [ $? -eq 0 ]; then
+            echo "Kasutaja nimega $kasutajanimi on lisatud süsteemi."
+
+            # Lisa vajalikud failid kodukataloogi struktuuri
+            sudo cp -r /etc/skel/. "/home/$kasutajanimi/"
+
+            # Lisa kasutajale parool shadow faili sisse
+            sudo usermod -p "$(openssl passwd -1 "$parool")" "$kasutajanimi"
+
+            # Salvesta kasutajanime ja parooli logifaili
+            echo "$kasutajanimi:$parool" >> "$logifail"
+
+            echo "Parool lisatud kasutajale $kasutajanimi."
+
+            # Näita kasutajainfo
+            sudo id "$kasutajanimi"
+            sudo ls -la "/home/$kasutajanimi"
+        else
+            echo "Probleem kasutaja $kasutajanimi lisamisega."
+            echo "Probleemi kood on $?."
+        fi
+    fi
+
+    echo "-------------------------"
+done < "$kasutajad_fail"
+
