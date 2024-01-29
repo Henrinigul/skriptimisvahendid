@@ -1,0 +1,52 @@
+#!/bin/bash
+
+# Kontrolli, kas on antud õige arv parameetreid
+if [ $# -ne 1 ]; then
+    echo "Kasutusjuhend: $0 failinimi"
+    exit 1
+fi
+
+# Määra failinimi muutujasse
+failinimi="$1"
+
+# Kontrolli, kas fail eksisteerib
+if [ ! -f "$failinimi" ]; then
+    echo "Faili $failinimi ei leitud."
+    exit 1
+fi
+
+# Loe iga rida failist ja käivita lisa_kasutaja skript
+while IFS=':' read -r kasutajanimi parool || [ -n "$kasutajanimi" ]; do
+    echo "Lisan kasutaja: $kasutajanimi"
+
+    # Kontrolli, kas kasutaja on juba olemas
+    if sudo id "$kasutajanimi" &>/dev/null; then
+        echo "Kasutaja nimega $kasutajanimi on juba olemas."
+    else
+        # Kasuta sudo useradd käsku vajalike võtmetega
+        sudo useradd "$kasutajanimi" -m -s /bin/bash
+
+        # Kontrolli, kas kasutaja lisamine oli edukas
+        if [ $? -eq 0 ]; then
+            echo "Kasutaja nimega $kasutajanimi on lisatud süsteemi."
+
+            # Lisa vajalikud failid kodukataloogi struktuuri
+            sudo cp -r /etc/skel/. "/home/$kasutajanimi/"
+
+            # Lisa kasutajale parool shadow faili sisse
+            sudo usermod -p "$parool" "$kasutajanimi"
+
+            echo "Parool lisatud kasutajale $kasutajanimi."
+
+            # Näita kasutajainfo
+            sudo id "$kasutajanimi"
+            sudo ls -la "/home/$kasutajanimi"
+        else
+            echo "Probleem kasutaja $kasutajanimi lisamisega."
+            echo "Probleemi kood on $?."
+        fi
+    fi
+
+    echo "-------------------------"
+done < "$failinimi"
+
